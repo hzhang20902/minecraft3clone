@@ -4,10 +4,20 @@ import { useEffect, useRef } from "react";
 import { Vector3 } from "three";
 import { useKeyboard } from "../hooks/useKeyboard";
 
-export const Player = () => {
-    const actions = useKeyboard()
+const JUMP_FORCE = 4
+const SPEED = 4
 
-    console.log('actions', Object.entries(actions).filter(([k, v]) => v))
+export const Player = () => {
+    const {
+        moveBackward,
+        moveForward,
+        moveLeft,
+        moveRight,
+        jump
+    } = useKeyboard()
+
+    // console.log('actions', Object.entries(actions).filter(([k, v]) => v))
+
     const { camera } = useThree()
     const [ref, api] = useSphere(() => ({
         mass: 1,
@@ -33,7 +43,32 @@ export const Player = () => {
             playerPosition.current[1], 
             playerPosition.current[2]))
 
-        api.velocity.set(0,0,0)
+        const direction = new Vector3()
+        const frontVector = new Vector3(
+            0,
+            0,
+            (moveBackward ? 1 : 0) - (moveForward ? 1 : 0)
+        )
+        const sideVector = new Vector3(
+            (moveLeft ? 1 : 0) - (moveRight ? 1 : 0),
+            0,
+            0
+        )
+
+        direction
+            .subVectors(frontVector, sideVector)
+            .normalize()
+            .multiplyScalar(SPEED)
+            .applyEuler(camera.rotation)
+
+        api.velocity.set(direction.x, playerVelocity.current[1], direction.z)
+
+        if(jump && Math.abs(playerVelocity.current[1]) < 0.05){
+        api.velocity.set(
+            playerVelocity.current[0],
+            JUMP_FORCE,
+            playerVelocity.current[2])
+        }
     })
 
     return (
