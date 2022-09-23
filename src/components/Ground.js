@@ -1,6 +1,6 @@
-import { usePlane } from "@react-three/cannon"
-import { groundTex } from "../images/textures"
-import { useStore } from "../hooks/useStore"
+import { usePlane } from "@react-three/cannon";
+import { groundTexture } from "../images/textures";
+import { useStore } from "../hooks/useStore";
 
 export const Ground = () => {
     const [ref] = usePlane(() => ({
@@ -10,7 +10,7 @@ export const Ground = () => {
 
     const [addCube] = useStore((state) => [state.addCube])
 
-    groundTex.repeat.set(100,100)
+    groundTexture.repeat.set(100,100)
 
     return (
         <mesh 
@@ -20,8 +20,8 @@ export const Ground = () => {
             addCube(x,y,z)
         }}
         ref={ref}>
-            <planeBufferGeometry attach='geometry' args={[100,100]} />
-            <meshStandardMaterial attach='material' map={groundTex} />
+            <planeGeometry attach='geometry' args={[100,100]} />
+            <meshStandardMaterial attach='material' map={groundTexture} />
         </mesh>
     )
 }
