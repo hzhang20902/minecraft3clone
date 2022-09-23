@@ -70,10 +70,18 @@ body {
   padding: 1px;
   font-size: 50%;
   background-color: green;
-  opacity: 60%;
+  opacity: 50%;
 }
 
 h6 {
   margin: .5em;
   font-weight: 800;
+}
+
+.sneaky {
+  opacity: 100%;
+  margin-top: 1em;
+  padding: 1px;
+  font-size: 50%;
+  background-color: green;
 }

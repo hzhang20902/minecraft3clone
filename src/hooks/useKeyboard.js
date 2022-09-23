@@ -14,6 +14,7 @@ function actionByKey(key){
         Digit5: 'log',
         KeyP: 'save',
         Digit0: 'reset',
+        Digit8: 'venmo',
     }
     return keyActionMap[key]
 }
@@ -32,6 +33,7 @@ export const useKeyboard = () => {
         log: false,
         save: false,
         reset: false,
+        venmo: false,
     })
 
     const handleKeyDown = useCallback((e) => {
