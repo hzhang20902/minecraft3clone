@@ -8,12 +8,13 @@ const JUMP_FORCE = 4
 const SPEED = 4
 
 export const Player = () => {
+
     const {
         moveBackward,
         moveForward,
         moveLeft,
         moveRight,
-        jump
+        jump,
     } = useKeyboard()
 
     // console.log('actions', Object.entries(actions).filter(([k, v]) => v))
