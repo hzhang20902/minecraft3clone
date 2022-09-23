@@ -49,7 +49,7 @@ body {
   transform: translate(-50%, -50%);
 }
 .cursor {
-  color: black;
+  color: lightblue;
 }
 
 .texture-selector {
